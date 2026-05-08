@@ -88,6 +88,17 @@ def save_transparent_gif(frames: list[Image.Image], path: Path, scale: int, dura
     palette = make_global_palette(upscaled)
     colors = [tuple(palette[i : i + 3]) for i in range(0, 768, 3)]
     color_to_index = {rgb: i for i, rgb in enumerate(colors)}
+    nearest_cache: dict[tuple[int, int, int], int] = {}
+
+    def nearest_index(rgb: tuple[int, int, int]) -> int:
+        if rgb in nearest_cache:
+            return nearest_cache[rgb]
+        best = min(
+            range(1, 256),
+            key=lambda i: sum((rgb[channel] - colors[i][channel]) ** 2 for channel in range(3)),
+        )
+        nearest_cache[rgb] = best
+        return best
 
     paletted_frames: list[Image.Image] = []
     for frame in upscaled:
@@ -98,7 +109,7 @@ def save_transparent_gif(frames: list[Image.Image], path: Path, scale: int, dura
         for y in range(frame.height):
             for x in range(frame.width):
                 r, g, b, a = src[x, y]
-                dst[x, y] = 0 if a == 0 else color_to_index.get((r, g, b), 1)
+                dst[x, y] = 0 if a == 0 else color_to_index.get((r, g, b), nearest_index((r, g, b)))
         paletted_frames.append(out)
 
     paletted_frames[0].save(

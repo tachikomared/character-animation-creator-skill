@@ -1,0 +1,11 @@
+{
+  "accepted": false,
+  "reviewer_notes": "Reject until the contact sheet and preview are manually inspected.",
+  "checks": {
+    "reference_identity": "fail",
+    "direction": "fail",
+    "animation_readable": "fail",
+    "frame_separation": "fail",
+    "not_procedural": "fail"
+  }
+}

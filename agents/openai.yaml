@@ -1,4 +1,4 @@
 interface:
-  display_name: "Game Character 64"
-  short_description: "Make 64x64 8-way pixel sprites."
-  default_prompt: "Create a 64x64 pixel-art game character with 8-direction movement and attack animations."
+  display_name: "Game Character Sprites"
+  short_description: "Make reference-grounded 32/64/128 pixel sprite animations."
+  default_prompt: "Use $game-character-sprites to create fixed-cell pixel-art character animations with separate imagegen outputs for each requested native cell size, provenance, visual QA, and GIF/WebP previews."

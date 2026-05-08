@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Legacy compatibility wrapper. Prefer validate_sheet.py for new workflows."""
+"""Size-neutral entry point for fixed-cell sprite atlas validation."""
 
 from __future__ import annotations
 
